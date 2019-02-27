@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -23,7 +24,8 @@ public class ExpenseService {
   }
 
   Expense findOne(long expenseId) {
-    return repository.findOne(expenseId);
+    Optional<Expense> expense = repository.findById(expenseId);
+    return expense.get();
   }
 
   Collection<Expense> find(DateWrapper date) {
@@ -31,7 +33,7 @@ public class ExpenseService {
   }
 
   public void delete(Long expenseId) {
-    repository.delete(expenseId);
+    repository.deleteById(expenseId);
   }
 
   public Collection<Expense> findAll() {

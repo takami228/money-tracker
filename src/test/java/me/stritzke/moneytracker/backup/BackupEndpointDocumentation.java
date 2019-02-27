@@ -3,13 +3,10 @@ package me.stritzke.moneytracker.backup;
 import me.stritzke.moneytracker.AbstractEndpointDocumentation;
 import org.junit.Test;
 import org.springframework.http.MediaType;
-import org.springframework.restdocs.payload.JsonFieldType;
 
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post;
-import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
-import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
 import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
 import static org.springframework.restdocs.request.RequestDocumentation.requestParameters;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -23,14 +20,7 @@ public class BackupEndpointDocumentation extends AbstractEndpointDocumentation {
 
     getMockMvc().perform(get("/api/backup").accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isOk())
-            .andDo(document("backup/create", responseFields(
-                    fieldWithPath("version")
-                            .type(JsonFieldType.NUMBER)
-                            .description("Schema version"),
-                    fieldWithPath("expenses")
-                            .type(JsonFieldType.ARRAY)
-                            .description("Array of all expenses stored in the application.")
-            )));
+            .andDo(document("backup/create"));
   }
 
   @Test
