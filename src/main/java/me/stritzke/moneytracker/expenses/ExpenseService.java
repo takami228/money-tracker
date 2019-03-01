@@ -25,7 +25,7 @@ public class ExpenseService {
 
   Expense findOne(long expenseId) {
     Optional<Expense> expense = repository.findById(expenseId);
-    return expense.get();
+    return expense.orElse(null);
   }
 
   Collection<Expense> find(DateWrapper date) {
